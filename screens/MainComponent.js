@@ -3,6 +3,16 @@ import Constants from "expo-constants";
 import CampsiteInfoScreen from "./CampsiteInfoScreen";
 import DirectoryScreen from "./DirectoryScreen";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import HomeScreen from "./HomeScreen";
+
+
+const Drawer = createDrawerNavigator();
+
+const screenOptions = {
+  headerTintColor: "#fff",
+  headerStyle: { backgroundColor: "#5637DD" }
+};
 
 const DirectoryNavigator = () => {
   const Stack = createStackNavigator();
@@ -40,7 +50,7 @@ const Main = () => {
         paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
       }}
     >
-      <DirectoryNavigator />
+      <DirectoryNavigator/>
     </View>
   );
 };
