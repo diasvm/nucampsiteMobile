@@ -6,8 +6,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeScreen from "./HomeScreen";
 
-
 const Drawer = createDrawerNavigator();
+
+const screenOptions = {
+  headerTintColor: "#fff",
+  headerStyle: { backgroundColor: "#5637DD" },
+};
 
 const HomeNavigator = () => {
   const Stack = createStackNavigator();
@@ -20,12 +24,6 @@ const HomeNavigator = () => {
       />
     </Stack.Navigator>
   );
-};
-
-
-const screenOptions = {
-  headerTintColor: "#fff",
-  headerStyle: { backgroundColor: "#5637DD" }
 };
 
 const DirectoryNavigator = () => {
