@@ -9,6 +9,20 @@ import HomeScreen from "./HomeScreen";
 
 const Drawer = createDrawerNavigator();
 
+const HomeNavigator = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ title: "Home" }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+
 const screenOptions = {
   headerTintColor: "#fff",
   headerStyle: { backgroundColor: "#5637DD" }
