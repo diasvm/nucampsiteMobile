@@ -62,7 +62,21 @@ const Main = () => {
         paddingTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
       }}
     >
-      <DirectoryNavigator/>
+      <Drawer.Navigator
+        initialRouteName="Home"
+        drawerStyle={{ backgroundColor: "#CFC8FF" }}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeNavigator}
+          options={{ title: "Home" }}
+        />
+        <Drawer.Screen
+          name="Directory"
+          component={DirectoryNavigator}
+          options={{ title: "Directory" }}
+        />
+      </Drawer.Navigator>
     </View>
   );
 };

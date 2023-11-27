@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Text, View } from "react-native";
-import { card } from "react-native-elements";
+import { ScrollView, Text, View } from "react-native";
+import { Card } from "react-native-elements";
 import { CAMPSITES } from "../shared/campsites";
 import { PROMOTIONS } from "../shared/promotions";
 import { PARTNERS } from "../shared/partners";
-import { Card } from "react-native-elements/dist/card/Card";
+
 
 const FeaturedItem = ({ item }) => {
   if (item) {
