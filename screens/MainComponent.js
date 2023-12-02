@@ -8,6 +8,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "
 import HomeScreen from "./HomeScreen";
 import AboutScreen from "./AboutScreen";
 import ContactScreen from "./ContactScreen";
+import ReservationScreen from "./ReservationScreen"
 import { Icon } from "react-native-elements";
 import logo from '../assets/images/logo.png'
 import { useDispatch } from 'react-redux';
@@ -122,6 +123,29 @@ const ContactNavigator = () => {
   );
 };
 
+const ReservationNavigator = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Reservation"
+        component={ReservationScreen}
+        options={({ navigation }) => ({
+          title: "Reservation Search",
+          headerLeft: () => (
+            <Icon
+              name="address-card"
+              type="font-awesome"
+              iconStyle={styles.stackIcon}
+              onPress={() => navigation.toggleDrawer()}
+            />
+          ),
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const CustomDrawerContent = (props) => {
     return (
       <DrawerContentScrollView {...props}>
@@ -193,6 +217,22 @@ const Main = () => {
           }}
         />
         <Drawer.Screen
+          name="ReserveCampsite"
+          component={ReservationNavigator}
+          options={{
+            title: "Reserve Campsite",
+            drawerIcon: ({ color }) => (
+              <Icon
+                name="tree"
+                type="font-awesome"
+                size={24}
+                iconStyle={{ width: 24 }}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
           name="About"
           component={AboutNavigator}
           options={{
@@ -221,7 +261,7 @@ const Main = () => {
                 iconStyle={{ width: 24 }}
                 color={color}
               />
-            )
+            ),
           }}
         />
       </Drawer.Navigator>
