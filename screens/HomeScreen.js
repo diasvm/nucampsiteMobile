@@ -14,7 +14,7 @@ const FeaturedItem = ({ item, isLoading, errMess }) => {
   if (errMess) {
     return (
       <View>
-        <Text>{errMess}</Text>
+        <Text>{ errMess}</Text>
       </View>
     );
   }
