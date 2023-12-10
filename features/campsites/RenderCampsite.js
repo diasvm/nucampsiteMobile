@@ -17,8 +17,8 @@ const RenderCampsite = (props) => {
     onPanResponderGrant: () => {
       view.current
         .rubberBand(1000)
-        .then((endState) =>
-          console.log(endState.finished ? "finished" : "canceled")
+        .then((endstate) =>
+          console.log(endstate.finished ? "finished" : "canceled")
         );
     },
     onPanResponderEnd: (e, gestureState) => {
@@ -44,7 +44,7 @@ const RenderCampsite = (props) => {
           { cancelable: false }
         );
       } else if (isRightSwipe(gestureState)) {
-        props.onShowModal();
+                props.onShowModal();
       }
     },
   });
@@ -74,7 +74,7 @@ const RenderCampsite = (props) => {
               reverse
               onPress={() =>
                 props.isFavorite
-                  ? console.log("Already set as a favorite")
+                  ? console.log("Already set as favorite")
                   : props.markFavorite()
               }
             />
@@ -84,7 +84,7 @@ const RenderCampsite = (props) => {
               color="#5637DD"
               raised
               reverse
-              onPress={props.onShowModal}
+              onPress={() => props.onShowModal()}
             />
           </View>
         </Card>
@@ -114,6 +114,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
     fontSize: 20,
+  },
+  iconContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
 
