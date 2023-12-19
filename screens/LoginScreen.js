@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as ImagePicker from 'expo-image-picker';
 import { baseUrl } from '../shared/baseUrl';
 import logo from '../assets/images/logo.png';
+import * as ImageManipulator from "expo-image-manipulator";
 
 
 const LoginTab = ({ navigation }) => {
@@ -151,7 +152,7 @@ const RegisterTab = () => {
           });
           if (capturedImage.assets) {
             console.log(capturedImage.assets[0]);
-            setImageUrl(capturedImage.assets[0].uri);
+            processImage(capturedImage.assets[0].uri);
           }
         } else {
           // Handle the case where permission is not granted
@@ -159,16 +160,53 @@ const RegisterTab = () => {
         }
     }
 
+    const processImage = async (imgUri) => {
+      try {
+        const processedImage = await ImageManipulator.manipulateAsync(
+          imgUri,
+          [{ resize: { width: 400 } }],
+          { format: "png" }
+         );
+
+        console.log(processedImage);
+
+        setImageUrl(processedImage.uri);
+      } catch (error) {
+        console.error("Error processing image:", error.message);
+      }
+  };
+
+    const getImageFromGallery = async () => {
+      const mediaLibraryPermission =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+      if (mediaLibraryPermission.status === "granted") {
+        const capturedImage = await ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [1, 1],
+        });
+
+        if (capturedImage.assets) {
+          console.log(capturedImage.assets[0]);
+          processImage(capturedImage.assets[0].uri);
+        }
+      } else {
+        console.warn("Media library permission not granted.");
+      }
+    };
+
+
         return (
           <ScrollView>
             <View style={styles.container}>
               <View style={styles.imageContainer}>
-                  <Image
-                      source={{ uri: imageUrl }}
-                      loadingIndicatorSource = {logo}
-                      style={styles.image}
-                  />
-                  <Button title='Camera' onPress={getImageFromCamera} />
+                <Image
+                  source={{ uri: imageUrl }}
+                  loadingIndicatorSource={logo}
+                  style={styles.image}
+                />
+                <Button title="Camera" onPress={getImageFromCamera} />
+                <Button title="Gallery" onPress={getImageFromGallery} />
               </View>
               <Input
                 placeholder="Username"
